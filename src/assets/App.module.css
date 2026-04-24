@@ -1,0 +1,24 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  min-width: 260px;
+  max-width: 340px;
+  background-color: #121212;
+  border-right: 1px solid #1f1f1f;
+  overflow-y: auto;
+}
+
+/* Main Content */
+.main {
+  flex: 1;
+  background: linear-gradient(#1e1e1e, #121212);
+  color: white;
+  padding: 20px;
+}

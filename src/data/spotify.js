@@ -1,0 +1,85 @@
+export const artists = [
+  { id:"a1", name:"The Weeknd",     image:"https://picsum.photos/seed/weeknd/300/300",     followers:"38.2M", genre:"R&B/Soul"  },
+  { id:"a2", name:"Taylor Swift",   image:"https://picsum.photos/seed/taylorswift/300/300", followers:"92.5M", genre:"Pop"       },
+  { id:"a3", name:"Drake",          image:"https://picsum.photos/seed/drake/300/300",       followers:"61.1M", genre:"Hip-Hop"   },
+  { id:"a4", name:"Billie Eilish",  image:"https://picsum.photos/seed/billie/300/300",      followers:"55.8M", genre:"Indie Pop" },
+  { id:"a5", name:"Bad Bunny",      image:"https://picsum.photos/seed/badbunny/300/300",    followers:"44.3M", genre:"Reggaeton" },
+  { id:"a6", name:"Kendrick Lamar", image:"https://picsum.photos/seed/kendrick/300/300",    followers:"29.7M", genre:"Hip-Hop"   },
+];
+
+export const albums = [
+  { id:"al1", title:"After Hours",                  artist:"The Weeknd",     artistId:"a1", image:"https://picsum.photos/seed/afterhours/300/300", year:2020, genre:"R&B",
+    songs:[
+      {id:"s1",title:"Alone Again",duration:"4:10",plays:"320M"},{id:"s2",title:"Too Late",duration:"3:59",plays:"198M"},
+      {id:"s3",title:"Hardest To Love",duration:"4:09",plays:"175M"},{id:"s4",title:"Scared To Live",duration:"3:13",plays:"210M"},
+      {id:"s5",title:"Snowchild",duration:"4:07",plays:"189M"},{id:"s6",title:"Escape From LA",duration:"5:55",plays:"145M"},
+      {id:"s7",title:"Heartless",duration:"3:17",plays:"512M"},{id:"s8",title:"Faith",duration:"6:01",plays:"134M"},
+      {id:"s9",title:"Blinding Lights",duration:"3:20",plays:"1.2B"},{id:"s10",title:"In Your Eyes",duration:"3:57",plays:"420M"},
+      {id:"s11",title:"Save Your Tears",duration:"3:36",plays:"890M"},{id:"s12",title:"Repeat After Me",duration:"4:24",plays:"98M"},
+    ]},
+  { id:"al2", title:"Midnights",                    artist:"Taylor Swift",   artistId:"a2", image:"https://picsum.photos/seed/midnights/300/300",  year:2022, genre:"Pop",
+    songs:[
+      {id:"s13",title:"Lavender Haze",duration:"3:22",plays:"780M"},{id:"s14",title:"Maroon",duration:"3:38",plays:"620M"},
+      {id:"s15",title:"Anti-Hero",duration:"3:20",plays:"1.4B"},{id:"s16",title:"Snow on the Beach",duration:"4:16",plays:"510M"},
+      {id:"s17",title:"Midnight Rain",duration:"2:54",plays:"470M"},{id:"s18",title:"Question...?",duration:"3:13",plays:"390M"},
+      {id:"s19",title:"Vigilante Shit",duration:"2:44",plays:"410M"},{id:"s20",title:"Bejeweled",duration:"3:15",plays:"600M"},
+      {id:"s21",title:"Labyrinth",duration:"3:49",plays:"310M"},{id:"s22",title:"Karma",duration:"3:25",plays:"690M"},
+    ]},
+  { id:"al3", title:"Certified Lover Boy",           artist:"Drake",          artistId:"a3", image:"https://picsum.photos/seed/clb/300/300",         year:2021, genre:"Hip-Hop",
+    songs:[
+      {id:"s23",title:"Champagne Poetry",duration:"5:44",plays:"340M"},{id:"s24",title:"Way 2 Sexy",duration:"4:13",plays:"560M"},
+      {id:"s25",title:"Girls Want Girls",duration:"3:48",plays:"480M"},{id:"s26",title:"In the Bible",duration:"4:09",plays:"220M"},
+      {id:"s27",title:"Love All",duration:"4:11",plays:"310M"},{id:"s28",title:"Fair Trade",duration:"4:55",plays:"270M"},
+      {id:"s29",title:"TSU",duration:"3:21",plays:"195M"},{id:"s30",title:"Papi's Home",duration:"2:50",plays:"285M"},
+    ]},
+  { id:"al4", title:"Happier Than Ever",             artist:"Billie Eilish",  artistId:"a4", image:"https://picsum.photos/seed/happier/300/300",     year:2021, genre:"Indie Pop",
+    songs:[
+      {id:"s31",title:"Getting Older",duration:"3:45",plays:"290M"},{id:"s32",title:"Billie Bossa Nova",duration:"3:05",plays:"260M"},
+      {id:"s33",title:"my future",duration:"3:31",plays:"540M"},{id:"s34",title:"Oxytocin",duration:"3:28",plays:"310M"},
+      {id:"s35",title:"GOLDWING",duration:"1:47",plays:"180M"},{id:"s36",title:"Lost Cause",duration:"2:58",plays:"380M"},
+      {id:"s37",title:"Halley's Comet",duration:"3:44",plays:"240M"},{id:"s38",title:"Not My Responsibility",duration:"4:26",plays:"195M"},
+      {id:"s39",title:"Overheated",duration:"2:41",plays:"170M"},{id:"s40",title:"Happier Than Ever",duration:"4:58",plays:"620M"},
+    ]},
+  { id:"al5", title:"Un Verano Sin Ti",              artist:"Bad Bunny",      artistId:"a5", image:"https://picsum.photos/seed/uvst/300/300",         year:2022, genre:"Reggaeton",
+    songs:[
+      {id:"s41",title:"El Apagón",duration:"5:01",plays:"610M"},{id:"s42",title:"Tití Me Preguntó",duration:"4:03",plays:"820M"},
+      {id:"s43",title:"Efecto",duration:"3:21",plays:"490M"},{id:"s44",title:"Moscow Mule",duration:"4:18",plays:"440M"},
+      {id:"s45",title:"Me Porto Bonito",duration:"2:49",plays:"960M"},{id:"s46",title:"Ojitos Lindos",duration:"3:42",plays:"570M"},
+    ]},
+  { id:"al6", title:"Mr. Morale & The Big Steppers", artist:"Kendrick Lamar", artistId:"a6", image:"https://picsum.photos/seed/mmtbs/300/300",        year:2022, genre:"Hip-Hop",
+    songs:[
+      {id:"s47",title:"United in Grief",duration:"3:51",plays:"210M"},{id:"s48",title:"N95",duration:"3:14",plays:"380M"},
+      {id:"s49",title:"Worldwide Steppers",duration:"3:09",plays:"190M"},{id:"s50",title:"Die Hard",duration:"4:02",plays:"280M"},
+      {id:"s51",title:"Father Time",duration:"4:11",plays:"260M"},{id:"s52",title:"Rich Spirit",duration:"3:13",plays:"320M"},
+      {id:"s53",title:"We Cry Together",duration:"4:52",plays:"170M"},{id:"s54",title:"Purple Hearts",duration:"4:36",plays:"230M"},
+      {id:"s55",title:"Count Me Out",duration:"4:21",plays:"290M"},{id:"s56",title:"Savior",duration:"3:55",plays:"245M"},
+    ]},
+];
+
+export const playlists = [
+  { id:"p1", title:"Today's Top Hits",  description:"The biggest songs right now",         image:"https://picsum.photos/seed/toptits/300/300",      songs:["s15","s3","s42","s13","s9","s22","s45","s24"], followers:"32.1M", owner:"Spotify" },
+  { id:"p2", title:"RapCaviar",         description:"New music from Drake, Kendrick & more", image:"https://picsum.photos/seed/rapcaviar/300/300",   songs:["s23","s47","s25","s48","s52","s24","s53"],     followers:"14.8M", owner:"Spotify" },
+  { id:"p3", title:"Liked Songs",       description:"Your favorite tracks",                 image:null,                                              songs:["s9","s15","s33","s40","s42","s1"],             followers:null,    owner:"You"     },
+  { id:"p4", title:"Chill Vibes",       description:"Laid-back beats for the evening",      image:"https://picsum.photos/seed/chillvibes/300/300",   songs:["s3","s5","s32","s34","s37","s17"],             followers:"5.2M",  owner:"Spotify" },
+  { id:"p5", title:"Pop Rising",        description:"Fresh pop from the next generation",   image:"https://picsum.photos/seed/poprising/300/300",    songs:["s13","s16","s20","s36","s40","s33"],           followers:"8.9M",  owner:"Spotify" },
+  { id:"p6", title:"Late Night Drive",  description:"Music for driving after midnight",     image:"https://picsum.photos/seed/latenightdrive/300/300",songs:["s1","s5","s7","s9","s10","s11"],              followers:"3.4M",  owner:"Spotify" },
+];
+
+export const categories = [
+  {id:"c1",name:"Pop",color:"#1e3264",image:"https://picsum.photos/seed/pop/200/200"},
+  {id:"c2",name:"Hip-Hop",color:"#8d67ab",image:"https://picsum.photos/seed/hiphop/200/200"},
+  {id:"c3",name:"R&B",color:"#ba5d07",image:"https://picsum.photos/seed/rnb/200/200"},
+  {id:"c4",name:"Rock",color:"#e8115b",image:"https://picsum.photos/seed/rock/200/200"},
+  {id:"c5",name:"Electronic",color:"#006450",image:"https://picsum.photos/seed/electronic/200/200"},
+  {id:"c6",name:"Latin",color:"#477d95",image:"https://picsum.photos/seed/latin/200/200"},
+  {id:"c7",name:"Indie",color:"#e91429",image:"https://picsum.photos/seed/indie/200/200"},
+  {id:"c8",name:"Jazz",color:"#503750",image:"https://picsum.photos/seed/jazz/200/200"},
+  {id:"c9",name:"Classical",color:"#0d73ec",image:"https://picsum.photos/seed/classical/200/200"},
+  {id:"c10",name:"Podcasts",color:"#27856a",image:"https://picsum.photos/seed/podcasts/200/200"},
+  {id:"c11",name:"Workout",color:"#af2896",image:"https://picsum.photos/seed/workout/200/200"},
+  {id:"c12",name:"Mood",color:"#148a08",image:"https://picsum.photos/seed/mood/200/200"},
+];
+
+export const getAllSongs = () => albums.flatMap(album =>
+  album.songs.map(song => ({...song, album:album.title, albumId:album.id, artist:album.artist, artistId:album.artistId, image:album.image}))
+);
