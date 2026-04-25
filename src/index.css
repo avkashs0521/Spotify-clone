@@ -236,6 +236,11 @@ body{background:var(--bg-base);color:var(--text-primary);font-family:'Figtree','
 .sidebar-library-item.active{background:rgba(255,255,255,.1);color:#fff}
 .sidebar-library-item img{width:40px;height:40px;border-radius:3px;object-fit:cover;flex-shrink:0}
 .sidebar-library-item.artist-lib img{border-radius:50%}
+.lib-item-img-wrap{position:relative;flex-shrink:0}
+.lib-play-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);border-radius:3px;opacity:0;transition:opacity .2s}
+.sidebar-library-item:hover .lib-play-icon{opacity:1}
+.lib-play-icon svg{width:16px;height:16px;fill:#fff}
+.sidebar-library-item.artist-lib .lib-play-icon{border-radius:50%}
 .sidebar-lib-info{min-width:0}
 .sidebar-lib-info h4{font-size:13px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px;color:var(--text-primary)}
 .sidebar-lib-info p{font-size:11px;color:var(--text-secondary);margin-top:1px}

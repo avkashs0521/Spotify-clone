@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { playlists, albums, artists } from '../data/spotify';
-import { IHome, ISearch, ILib } from './icons';
+import { IHome, ISearch, ILib, IPlay } from './icons';
 import { PlayerContext } from '../context/PlayerContext';
 
 export default function Sidebar({ page, nav, activeId }) {
@@ -42,12 +42,17 @@ export default function Sidebar({ page, nav, activeId }) {
             className={`sidebar-library-item${activeId === "p3" ? " active" : ""}`} 
             onClick={() => nav("playlist", "p3")}
           >
-            <div style={{
-              width: 40, height: 40, borderRadius: 3, flexShrink: 0, 
-              background: "linear-gradient(135deg,#450af5,#8e8ee5)", 
-              display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18
-            }}>
-              ♥
+            <div className="lib-item-img-wrap">
+              <div style={{
+                width: 40, height: 40, borderRadius: 3, flexShrink: 0, 
+                background: "linear-gradient(135deg,#450af5,#8e8ee5)", 
+                display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18
+              }}>
+                ♥
+              </div>
+              <div className="lib-play-icon">
+                <IPlay />
+              </div>
             </div>
             <div className="sidebar-lib-info">
               <h4>Liked Songs</h4>
@@ -62,7 +67,12 @@ export default function Sidebar({ page, nav, activeId }) {
               className={`sidebar-library-item${activeId === pl.id ? " active" : ""}`} 
               onClick={() => nav("playlist", pl.id)}
             >
-              <img src={pl.image} alt={pl.title} />
+              <div className="lib-item-img-wrap">
+                <img src={pl.image} alt={pl.title} />
+                <div className="lib-play-icon">
+                  <IPlay />
+                </div>
+              </div>
               <div className="sidebar-lib-info">
                 <h4>{pl.title}</h4>
                 <p>Playlist · {pl.owner}</p>
@@ -77,7 +87,12 @@ export default function Sidebar({ page, nav, activeId }) {
               className={`sidebar-library-item${activeId === al.id ? " active" : ""}`} 
               onClick={() => nav("album", al.id)}
             >
-              <img src={al.image} alt={al.title} />
+              <div className="lib-item-img-wrap">
+                <img src={al.image} alt={al.title} />
+                <div className="lib-play-icon">
+                  <IPlay />
+                </div>
+              </div>
               <div className="sidebar-lib-info">
                 <h4>{al.title}</h4>
                 <p>Album · {al.artist}</p>
@@ -92,7 +107,12 @@ export default function Sidebar({ page, nav, activeId }) {
               className={`sidebar-library-item artist-lib${activeId === ar.id ? " active" : ""}`} 
               onClick={() => nav("artist", ar.id)}
             >
-              <img src={ar.image} alt={ar.name} />
+              <div className="lib-item-img-wrap">
+                <img src={ar.image} alt={ar.name} />
+                <div className="lib-play-icon">
+                  <IPlay />
+                </div>
+              </div>
               <div className="sidebar-lib-info">
                 <h4>{ar.name}</h4>
                 <p>Artist</p>
