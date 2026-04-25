@@ -74,7 +74,7 @@ export default function Sidebar({ page, nav, activeId }) {
                 </div>
               </div>
               <div className="sidebar-lib-info">
-                <h4>{pl.title}</h4>
+                <h4>{pl.pinned ? "📌 " : ""}{pl.title}</h4>
                 <p>Playlist · {pl.owner}</p>
               </div>
             </button>

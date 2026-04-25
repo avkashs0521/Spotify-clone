@@ -50,7 +50,7 @@ export default function LibraryPage({ nav }) {
             <div key={pl.id} className="library-item" onClick={() => nav("playlist", pl.id)}>
               <img src={pl.image} alt={pl.title} />
               <div className="lib-item-info">
-                <h4>{pl.title}</h4>
+                <h4>{pl.pinned ? "📌 " : ""}{pl.title}</h4>
                 <p>Playlist · {pl.owner}</p>
               </div>
             </div>

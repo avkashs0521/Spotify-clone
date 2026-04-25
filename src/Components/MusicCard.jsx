@@ -51,7 +51,7 @@ export default function MusicCard({ item, type, onNavigate }) {
           <IPlay />
         </button>
       </div>
-      <h3>{item.title || item.name}</h3>
+      <h3>{item.pinned ? "📌 " : ""}{item.title || item.name}</h3>
       <p>{getSubtitle()}</p>
     </div>
   );

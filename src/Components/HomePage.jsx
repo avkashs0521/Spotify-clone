@@ -45,7 +45,7 @@ export default function HomePage({ nav }) {
                     src={item.image || "https://picsum.photos/seed/liked/300/300"} 
                     alt={item.title} 
                   />
-                  <span>{item.title}</span>
+                  <span>{item.pinned ? "📌 " : ""}{item.title}</span>
                   <button className="tile-play" onClick={(e) => handleQuickPlay(e, item)}>
                     <svg viewBox="0 0 24 24" style={{ fill: "#000", width: 18, height: 18, marginLeft: 2 }}>
                       <path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z" />
