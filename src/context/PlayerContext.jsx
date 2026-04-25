@@ -24,8 +24,24 @@ export function PlayerProvider({ children }) {
     setTimeout(() => setToast(null), 2200);
   };
 
-  const playSong = (song, q = []) => {
-    setCurrentSong(song);
+  const playSong = async (song, q = []) => {
+    let finalSong = { ...song };
+    
+    // Attempt to fetch actual preview from iTunes if src is a placeholder or missing
+    if (!song.src || song.src.includes("soundhelix")) {
+      try {
+        const query = encodeURIComponent(`${song.artist} ${song.title}`);
+        const response = await fetch(`https://itunes.apple.com/search?term=${query}&entity=song&limit=1`);
+        const data = await response.json();
+        if (data.results && data.results[0] && data.results[0].previewUrl) {
+          finalSong.src = data.results[0].previewUrl;
+        }
+      } catch (error) {
+        console.warn("Could not fetch actual preview, falling back to demo audio.", error);
+      }
+    }
+
+    setCurrentSong(finalSong);
     setIsPlaying(true);
     setProgress(0);
     
@@ -35,13 +51,13 @@ export function PlayerProvider({ children }) {
       setQueueIndex(idx >= 0 ? idx : 0);
     }
 
-    if (song.src) {
-      audioRef.current.src = song.src;
-      audioRef.current.play();
+    if (finalSong.src) {
+      audioRef.current.src = finalSong.src;
+      audioRef.current.play().catch(e => console.error("Playback failed:", e));
     }
   };
 
-  const playNext = () => {
+  const playNext = async () => {
     if (!queue.length) return;
     
     let nextIndex;
@@ -53,17 +69,10 @@ export function PlayerProvider({ children }) {
     
     setQueueIndex(nextIndex);
     const nextSong = queue[nextIndex];
-    setCurrentSong(nextSong);
-    setProgress(0);
-    setIsPlaying(true);
-
-    if (nextSong.src) {
-      audioRef.current.src = nextSong.src;
-      audioRef.current.play();
-    }
+    await playSong(nextSong, queue);
   };
 
-  const playPrev = () => {
+  const playPrev = async () => {
     if (!queue.length) return;
     
     // If we're more than 10% into the song, restart it instead of going back
@@ -76,14 +85,7 @@ export function PlayerProvider({ children }) {
     const prevIndex = (queueIndex - 1 + queue.length) % queue.length;
     setQueueIndex(prevIndex);
     const prevSong = queue[prevIndex];
-    setCurrentSong(prevSong);
-    setProgress(0);
-    setIsPlaying(true);
-
-    if (prevSong.src) {
-      audioRef.current.src = prevSong.src;
-      audioRef.current.play();
-    }
+    await playSong(prevSong, queue);
   };
 
   const togglePlay = () => {
