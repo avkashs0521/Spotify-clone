@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,useEffect } from 'react';
 import { PlayerContext } from '../context/PlayerContext';
 import { getAllSongs, playlists, albums, artists } from '../data/spotify';
 import MusicCard from './MusicCard';
