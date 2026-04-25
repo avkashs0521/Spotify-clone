@@ -17,8 +17,8 @@ body{background:var(--bg-base);color:var(--text-primary);font-family:'Figtree','
 .show-all-btn{font-size:12px;font-weight:700;color:var(--text-secondary);letter-spacing:.5px;text-transform:uppercase;background:none;border:none;cursor:pointer;transition:color .15s}
 .show-all-btn:hover{color:#fff}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:20px}
-.music-card{background:var(--bg-elevated);border-radius:8px;padding:16px;cursor:pointer;transition:background .2s;position:relative}
-.music-card:hover{background:var(--bg-highlight)}
+.music-card{background:var(--bg-elevated);border-radius:8px;padding:16px;cursor:pointer;transition:background .2s, transform .3s ease;position:relative}
+.music-card:hover{background:var(--bg-highlight);transform:scale(1.04)}
 .music-card-img-wrap{position:relative;margin-bottom:12px}
 .music-card-img-wrap img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;display:block}
 .music-card-img-wrap.artist-img img{border-radius:50%}
@@ -182,8 +182,8 @@ body{background:var(--bg-base);color:var(--text-primary);font-family:'Figtree','
 .home-gradient{background:linear-gradient(180deg,#1a3d2b 0%,var(--bg-base) 100%);padding:60px 32px 24px;width:100%;max-width:100%;box-sizing:border-box}
 .greeting h1{font-size:28px;font-weight:700;margin-bottom:20px}
 .quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;width:100%}
-.quick-tile{background:rgba(255,255,255,.07);border-radius:6px;display:flex;align-items:center;overflow:hidden;cursor:pointer;transition:background .15s;height:64px;position:relative}
-.quick-tile:hover{background:rgba(255,255,255,.15)}
+.quick-tile{background:rgba(255,255,255,.07);border-radius:6px;display:flex;align-items:center;overflow:hidden;cursor:pointer;transition:background .15s, transform .2s ease;height:64px;position:relative}
+.quick-tile:hover{background:rgba(255,255,255,.15);transform:scale(1.02)}
 .quick-tile img{width:64px;height:64px;object-fit:cover;flex-shrink:0}
 .quick-tile span{padding:0 16px;font-size:14px;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .quick-tile .tile-play{background:var(--green);border:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:12px;cursor:pointer;opacity:0;transition:opacity .15s;box-shadow:0 4px 12px rgba(0,0,0,.3);flex-shrink:0}
