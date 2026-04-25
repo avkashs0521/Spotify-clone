@@ -4,7 +4,7 @@ import { getAllSongs, playlists, albums, artists } from '../data/spotify';
 import MusicCard from './MusicCard';
 
 export default function HomePage({ nav }) {
-  const { playSong } = useContext(PlayerContext);
+  const { playSong, recentlyPlayed } = useContext(PlayerContext);
   const allSongs = getAllSongs();
   
   const hour = new Date().getHours();
@@ -59,6 +59,20 @@ export default function HomePage({ nav }) {
       </div>
       
       <div className="page">
+        {recentlyPlayed && recentlyPlayed.length > 0 && (
+          <div style={{ marginBottom: '40px' }}>
+            <div className="section-header">
+              <h2>Recently Played</h2>
+              <button className="show-all-btn">Show all</button>
+            </div>
+            <div className="card-grid">
+              {recentlyPlayed.map(song => (
+                <MusicCard key={song.id} item={song} type="song" onNavigate={nav} />
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="section-header">
           <h2>Featured playlists</h2>
           <button className="show-all-btn">Show all</button>

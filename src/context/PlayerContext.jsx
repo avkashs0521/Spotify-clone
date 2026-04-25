@@ -15,9 +15,17 @@ export function PlayerProvider({ children }) {
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState("off"); // 'off', 'all', 'one'
   const [toast, setToast] = useState(null);
+  const [recentlyPlayed, setRecentlyPlayed] = useState(() => {
+    const saved = localStorage.getItem('recentlyPlayed');
+    return saved ? JSON.parse(saved) : [];
+  });
   
   const audioRef = useRef(new Audio());
   const intervalRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem('recentlyPlayed', JSON.stringify(recentlyPlayed));
+  }, [recentlyPlayed]);
 
   const showToast = (msg) => {
     setToast(msg);
@@ -27,6 +35,13 @@ export function PlayerProvider({ children }) {
   const playSong = async (song, q = []) => {
     let finalSong = { ...song };
     
+    // Add to recently played
+    setRecentlyPlayed(prev => {
+      const filtered = prev.filter(s => s.id !== song.id);
+      const updated = [song, ...filtered].slice(0, 20); // Keep last 20
+      return updated;
+    });
+
     // Attempt to fetch actual preview from iTunes if src is a placeholder or missing
     if (!song.src || song.src.includes("soundhelix")) {
       try {
@@ -154,6 +169,7 @@ export function PlayerProvider({ children }) {
     shuffle,
     repeat,
     toast,
+    recentlyPlayed,
     playSong,
     togglePlay,
     playNext,

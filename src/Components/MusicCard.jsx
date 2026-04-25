@@ -10,7 +10,9 @@ export default function MusicCard({ item, type, onNavigate }) {
   const handlePlay = (e) => {
     e.stopPropagation();
     
-    if (type === "album") {
+    if (type === "song") {
+      playSong(item, [item]);
+    } else if (type === "album") {
       const songs = item.songs.map(s => ({
         ...s,
         artist: item.artist,
@@ -34,14 +36,24 @@ export default function MusicCard({ item, type, onNavigate }) {
   };
 
   const getSubtitle = () => {
+    if (type === "song") return item.artist;
     if (type === "album") return `${item.year} · ${item.genre}`;
     if (type === "playlist") return item.description;
     if (type === "artist") return "Artist";
     return "";
   };
 
+  const handleClick = () => {
+    if (!onNavigate) return;
+    if (type === "song") {
+      onNavigate("album", item.albumId);
+    } else {
+      onNavigate(type, item.id);
+    }
+  };
+
   return (
-    <div className="music-card" onClick={() => onNavigate && onNavigate(type, item.id)}>
+    <div className="music-card" onClick={handleClick}>
       <div className={`music-card-img-wrap${type === "artist" ? " artist-img" : ""}`}>
         <img 
           src={item.image || "https://picsum.photos/seed/default/300/300"} 
