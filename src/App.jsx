@@ -11,6 +11,7 @@ import ArtistPage from './Components/ArtistPage';
 import MobileNav from './Components/MobileNav';
 
 function AppLayout() {
+  const { currentSong } = useContext(PlayerContext);
   const [page, setPage] = useState("home");
   const [pageId, setPageId] = useState(null);
   const [history, setHistory] = useState([{ page: "home", id: null }]);
@@ -68,7 +69,7 @@ function AppLayout() {
   };
 
   return (
-    <div className="app-layout">
+    <div className={`app-layout${!currentSong ? " no-player" : ""}`}>
       <Sidebar page={page} nav={nav} activeId={pageId} />
       <main className="main-content">
         <div style={{

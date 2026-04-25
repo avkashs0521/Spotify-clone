@@ -5,7 +5,9 @@
   --green:#1db954;--player-height:90px;--sidebar-width:240px;
 }
 body{background:var(--bg-base);color:var(--text-primary);font-family:'Figtree','Helvetica Neue',Arial,sans-serif;overflow:hidden;height:100vh;user-select:none}
-.app-layout{display:grid;grid-template-columns:var(--sidebar-width) 1fr;grid-template-rows:1fr var(--player-height);height:100vh;grid-template-areas:"sidebar main" "player player"}
+.app-layout{display:grid;grid-template-columns:var(--sidebar-width) 1fr;grid-template-rows:1fr var(--player-height);height:100vh;grid-template-areas:"sidebar main" "player player";transition:grid-template-rows .3s ease}
+.app-layout.no-player{grid-template-rows:1fr 0px}
+.app-layout.no-player .mobile-nav{bottom:0 !important}
 .main-content{grid-area:main;overflow-y:auto;background:var(--bg-base);position:relative}
 .main-content::-webkit-scrollbar{width:6px}
 .main-content::-webkit-scrollbar-track{background:transparent}
@@ -54,11 +56,8 @@ body{background:var(--bg-base);color:var(--text-primary);font-family:'Figtree','
 .play-big-btn{background:var(--green);border:none;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s,transform .1s}
 .play-big-btn:hover{background:#1ed760;transform:scale(1.04)}
 .play-big-btn svg{fill:#000;width:24px;height:24px;margin-left:3px}
-<<<<<<< HEAD
 .follow-btn,.more-btn{background:none;border:1px solid var(--text-subdued);color:var(--text-primary);padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;transition:border-color .15s;letter-spacing:.5px}
 .follow-btn:hover,.more-btn:hover{border-color:#fff}
-=======
->>>>>>> c9777c9 (fix: toggle follow button state on click)
 .more-btn{border:none;font-size:22px;padding:0 4px;letter-spacing:0}
 .home-gradient{background:linear-gradient(180deg,#1a3d2b 0%,var(--bg-base) 100%);padding:60px 32px 24px}
 .greeting h1{font-size:28px;font-weight:700;margin-bottom:20px}

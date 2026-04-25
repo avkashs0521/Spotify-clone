@@ -9,6 +9,8 @@ export default function Player() {
     setVolume, setProgress, toggleLike, setShuffle, setRepeat
   } = useContext(PlayerContext);
 
+  if (!currentSong) return null;
+
   const parseDuration = (durationString) => {
     if (!durationString) return 0;
     const [minutes, seconds] = durationString.split(":").map(Number);
