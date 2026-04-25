@@ -20,6 +20,7 @@ export default function ArtistPage({ id, nav }) {
   const displayedSongs = showAll ? artistSongs : artistSongs.slice(0, 5);
   const isCurrent = currentSong && artistSongs.some(s => s.id === currentSong.id);
 
+  const [isFollowing, setIsFollowing] = useState(false);
   const handlePlayClick = () => {
     if (artistSongs.length === 0) return;
     
@@ -48,7 +49,12 @@ export default function ArtistPage({ id, nav }) {
         <button className="play-big-btn" onClick={handlePlayClick}>
           {isCurrent && isPlaying ? <IPause /> : <IPlay />}
         </button>
-        <button className="follow-btn">Follow</button>
+        <button 
+          className={`follow-btn${isFollowing ? " following" : ""}`} 
+          onClick={() => setIsFollowing(!isFollowing)}
+        >
+          {isFollowing ? "Following" : "Follow"}
+        </button>
         <button className="more-btn">···</button>
       </div>
       
