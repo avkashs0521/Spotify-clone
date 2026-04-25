@@ -8,6 +8,7 @@ import LibraryPage from './Components/LibraryPage';
 import AlbumPage from './Components/AlbumPage';
 import PlaylistPage from './Components/PlaylistPage';
 import ArtistPage from './Components/ArtistPage';
+import MobileNav from './Components/MobileNav';
 
 function AppLayout() {
   const [page, setPage] = useState("home");
@@ -110,6 +111,7 @@ function AppLayout() {
         {renderPage()}
       </main>
       <Player />
+      <MobileNav page={page} nav={nav} />
     </div>
   );
 }
