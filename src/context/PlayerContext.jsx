@@ -16,6 +16,7 @@ export function PlayerProvider({ children }) {
   const [repeat, setRepeat] = useState("off"); // 'off', 'all', 'one'
   const [toast, setToast] = useState(null);
   
+  const audioRef = useRef(new Audio());
   const intervalRef = useRef(null);
 
   const showToast = (msg) => {
@@ -33,6 +34,11 @@ export function PlayerProvider({ children }) {
       const idx = q.findIndex(s => s.id === song.id);
       setQueueIndex(idx >= 0 ? idx : 0);
     }
+
+    if (song.src) {
+      audioRef.current.src = song.src;
+      audioRef.current.play();
+    }
   };
 
   const playNext = () => {
@@ -46,9 +52,15 @@ export function PlayerProvider({ children }) {
     }
     
     setQueueIndex(nextIndex);
-    setCurrentSong(queue[nextIndex]);
+    const nextSong = queue[nextIndex];
+    setCurrentSong(nextSong);
     setProgress(0);
     setIsPlaying(true);
+
+    if (nextSong.src) {
+      audioRef.current.src = nextSong.src;
+      audioRef.current.play();
+    }
   };
 
   const playPrev = () => {
@@ -56,18 +68,34 @@ export function PlayerProvider({ children }) {
     
     // If we're more than 10% into the song, restart it instead of going back
     if (progress > 10) {
+      audioRef.current.currentTime = 0;
       setProgress(0);
       return;
     }
     
     const prevIndex = (queueIndex - 1 + queue.length) % queue.length;
     setQueueIndex(prevIndex);
-    setCurrentSong(queue[prevIndex]);
+    const prevSong = queue[prevIndex];
+    setCurrentSong(prevSong);
     setProgress(0);
     setIsPlaying(true);
+
+    if (prevSong.src) {
+      audioRef.current.src = prevSong.src;
+      audioRef.current.play();
+    }
   };
 
-  const togglePlay = () => setIsPlaying(p => !p);
+  const togglePlay = () => {
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      if (audioRef.current.src) {
+        audioRef.current.play();
+      }
+    }
+    setIsPlaying(p => !p);
+  };
 
   const toggleLike = (id) => {
     setLikedSongs(prev => {
@@ -83,27 +111,36 @@ export function PlayerProvider({ children }) {
     });
   };
 
-  // Simulating playback progress
+  // Sync audio with state and volume
   useEffect(() => {
-    if (isPlaying) {
-      intervalRef.current = setInterval(() => {
-        setProgress(p => {
-          if (p >= 100) {
-            if (repeat === "one") {
-              return 0; // Loop current song
-            }
-            setTimeout(playNext, 50); // Move to next song
-            return 0;
-          }
-          return p + 0.15; // Simulate progress tick
-        });
-      }, 100);
-    } else {
-      clearInterval(intervalRef.current);
-    }
+    audioRef.current.volume = volume / 100;
+  }, [volume]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
     
-    return () => clearInterval(intervalRef.current);
-  }, [isPlaying, repeat, queueIndex, shuffle, queue.length]);
+    const onTimeUpdate = () => {
+      const p = (audio.currentTime / audio.duration) * 100;
+      setProgress(isNaN(p) ? 0 : p);
+    };
+
+    const onEnded = () => {
+      if (repeat === "one") {
+        audio.currentTime = 0;
+        audio.play();
+      } else {
+        playNext();
+      }
+    };
+
+    audio.addEventListener('timeupdate', onTimeUpdate);
+    audio.addEventListener('ended', onEnded);
+    
+    return () => {
+      audio.removeEventListener('timeupdate', onTimeUpdate);
+      audio.removeEventListener('ended', onEnded);
+    };
+  }, [queueIndex, repeat, shuffle, queue]);
 
   const value = {
     currentSong,
