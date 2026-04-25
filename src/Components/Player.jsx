@@ -34,8 +34,27 @@ export default function Player() {
 
   const handleVolumeClick = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const newVolume = Math.round(Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100)));
+    const height = rect.height;
+    const clickY = e.clientY - rect.top;
+    const newVolume = Math.round(Math.max(0, Math.min(100, (1 - (clickY / height)) * 100)));
     setVolume(newVolume);
+  };
+
+  const handleVolumeMouseDown = (e) => {
+    handleVolumeClick(e);
+    const onMouseMove = (moveEvent) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const height = rect.height;
+      const clickY = moveEvent.clientY - rect.top;
+      const newVolume = Math.round(Math.max(0, Math.min(100, (1 - (clickY / height)) * 100)));
+      setVolume(newVolume);
+    };
+    const onMouseUp = () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
   };
 
   const cycleRepeat = () => {
@@ -106,10 +125,14 @@ export default function Player() {
 
       <div className="player-right">
         <div className="volume-wrap">
-          <IVol v={volume} />
-          <div className="volume-bar" onClick={handleVolumeClick}>
-            <div className="volume-fill" style={{ width: `${volume}%` }} />
+          <div className="volume-slider-container">
+            <div className="volume-bar-vertical" onMouseDown={handleVolumeMouseDown}>
+              <div className="volume-fill-vertical" style={{ height: `${volume}%` }}>
+                <div className="volume-thumb-vertical" />
+              </div>
+            </div>
           </div>
+          <IVol v={volume} />
         </div>
       </div>
     </footer>
