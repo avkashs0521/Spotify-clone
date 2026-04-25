@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { PlayerContext } from '../context/PlayerContext';
 import { getAllSongs, playlists } from '../data/spotify';
 import SongRow from './SongRow';
@@ -6,11 +6,12 @@ import { IPlay, IPause } from './icons';
 
 export default function PlaylistPage({ id, nav }) {
   const { playSong, currentSong, isPlaying, togglePlay, likedSongs } = useContext(PlayerContext);
+  const [isFollowing, setIsFollowing] = useState(false);
   const allSongs = getAllSongs();
-  
+
   let playlist = playlists.find(p => p.id === id);
   const isLiked = id === "p3";
-  
+
   if (isLiked) {
     playlist = {
       id: "p3",
@@ -22,18 +23,18 @@ export default function PlaylistPage({ id, nav }) {
       followers: null
     };
   }
-  
+
   if (!playlist) {
     return <div style={{ padding: 40 }}>Playlist not found.</div>;
   }
-  
+
   // Get full song objects from IDs
   const songs = playlist.songs.map(sid => allSongs.find(s => s.id === sid)).filter(Boolean);
   const isCurrent = currentSong && songs.some(s => s.id === currentSong.id);
 
   const handlePlayClick = () => {
     if (songs.length === 0) return;
-    
+
     if (isCurrent) {
       togglePlay();
     } else {
@@ -43,19 +44,19 @@ export default function PlaylistPage({ id, nav }) {
 
   return (
     <div>
-      <div 
-        className="page-hero" 
-        style={{ 
-          background: isLiked 
-            ? "linear-gradient(180deg,#4a0ed6 0%,var(--bg-base) 100%)" 
-            : "linear-gradient(180deg,#456 0%,var(--bg-base) 100%)" 
+      <div
+        className="page-hero"
+        style={{
+          background: isLiked
+            ? "linear-gradient(180deg,#4a0ed6 0%,var(--bg-base) 100%)"
+            : "linear-gradient(180deg,#456 0%,var(--bg-base) 100%)"
         }}
       >
         {isLiked ? (
           <div style={{
-            width: 200, height: 200, flexShrink: 0, 
-            background: "linear-gradient(135deg,#450af5,#8e8ee5)", 
-            borderRadius: 4, display: "flex", alignItems: "center", 
+            width: 200, height: 200, flexShrink: 0,
+            background: "linear-gradient(135deg,#450af5,#8e8ee5)",
+            borderRadius: 4, display: "flex", alignItems: "center",
             justifyContent: "center", fontSize: 80, boxShadow: "0 16px 48px rgba(0,0,0,.5)"
           }}>
             ♥
@@ -63,7 +64,7 @@ export default function PlaylistPage({ id, nav }) {
         ) : (
           <img src={playlist.image || "https://picsum.photos/seed/default/300/300"} alt={playlist.title} />
         )}
-        
+
         <div className="hero-info">
           <p className="hero-type">Playlist</p>
           <h1>{playlist.title}</h1>
@@ -83,15 +84,22 @@ export default function PlaylistPage({ id, nav }) {
           </div>
         </div>
       </div>
-      
+
       <div className="action-bar">
         <button className="play-big-btn" onClick={handlePlayClick}>
           {isCurrent && isPlaying ? <IPause /> : <IPlay />}
         </button>
-        {!isLiked && <button className="follow-btn">Follow</button>}
+        {!isLiked && (
+          <button
+            className={`follow-btn${isFollowing ? " following" : ""}`}
+            onClick={() => setIsFollowing(!isFollowing)}
+          >
+            {isFollowing ? "Following" : "Follow"}
+          </button>
+        )}
         <button className="more-btn">···</button>
       </div>
-      
+
       <div style={{ padding: "0 32px 100px" }}>
         {songs.length === 0 ? (
           <div style={{ padding: "40px 0", textAlign: "center" }}>
