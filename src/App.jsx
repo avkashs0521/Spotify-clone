@@ -9,6 +9,9 @@ import AlbumPage from './Components/AlbumPage';
 import PlaylistPage from './Components/PlaylistPage';
 import ArtistPage from './Components/ArtistPage';
 import MobileNav from './Components/MobileNav';
+import ProfilePage from './Components/ProfilePage';
+import AccountPage from './Components/AccountPage';
+import SettingsPage from './Components/SettingsPage';
 
 function AppLayout() {
   const { currentSong } = useContext(PlayerContext);
@@ -16,6 +19,7 @@ function AppLayout() {
   const [pageId, setPageId] = useState(null);
   const [history, setHistory] = useState([{ page: "home", id: null }]);
   const [hIdx, setHIdx] = useState(0);
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
   const nav = (target, id = null) => {
     setPage(target);
@@ -63,6 +67,12 @@ function AppLayout() {
         return <PlaylistPage id={pageId} nav={nav} />;
       case "artist":
         return <ArtistPage id={pageId} nav={nav} />;
+      case "profile":
+        return <ProfilePage />;
+      case "account":
+        return <AccountPage />;
+      case "settings":
+        return <SettingsPage />;
       default:
         return <HomePage nav={nav} />;
     }
@@ -98,15 +108,32 @@ function AppLayout() {
             ›
           </button>
           <div style={{ flex: 1 }} />
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <div 
+            style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", position: "relative" }}
+            onClick={() => setShowUserMenu(!showUserMenu)}
+          >
             <div style={{
               background: "#fff", borderRadius: "50%", width: 32, height: 32, 
               display: "flex", alignItems: "center", justifyContent: "center", 
-              cursor: "pointer", fontWeight: 700, fontSize: 13, color: "#000"
+              fontWeight: 700, fontSize: 13, color: "#000"
             }}>
               U
             </div>
             <span style={{ fontSize: 13, fontWeight: 700 }}>User</span>
+            
+            {showUserMenu && (
+              <div style={{
+                position: "absolute", top: "120%", right: 0, background: "#282828",
+                borderRadius: 4, padding: "4px", minWidth: 160, boxShadow: "0 16px 24px rgba(0,0,0,.3)",
+                zIndex: 100, display: "flex", flexDirection: "column"
+              }}>
+                <button className="user-menu-item" onClick={() => { nav("account"); setShowUserMenu(false); }} style={{ background:"transparent", border:"none", color:"#fff", padding:"12px", textAlign:"left", cursor:"pointer", fontSize: 14, borderRadius: 2 }}>Account</button>
+                <button className="user-menu-item" onClick={() => { nav("profile"); setShowUserMenu(false); }} style={{ background:"transparent", border:"none", color:"#fff", padding:"12px", textAlign:"left", cursor:"pointer", fontSize: 14, borderRadius: 2 }}>Profile</button>
+                <button className="user-menu-item" onClick={() => { nav("settings"); setShowUserMenu(false); }} style={{ background:"transparent", border:"none", color:"#fff", padding:"12px", textAlign:"left", cursor:"pointer", fontSize: 14, borderRadius: 2 }}>Settings</button>
+                <div style={{ height: 1, background: "rgba(255,255,255,0.1)", margin: "4px 0" }} />
+                <button className="user-menu-item" onClick={() => { alert("Logged out successfully!"); nav("home"); setShowUserMenu(false); }} style={{ background:"transparent", border:"none", color:"#fff", padding:"12px", textAlign:"left", cursor:"pointer", fontSize: 14, borderRadius: 2 }}>Log out</button>
+              </div>
+            )}
           </div>
         </div>
         {renderPage()}

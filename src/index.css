@@ -314,3 +314,6 @@ body{background:var(--bg-base);color:var(--text-primary);font-family:'Figtree','
   .player-song-info h4{max-width:100px}
 }
 
+.user-menu-item:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
